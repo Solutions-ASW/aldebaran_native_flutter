@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:aldebaran_native_flutter/app/components/charts/area_chart_widget.dart';
+import 'package:aldebaran_native_flutter/app/controllers/contrainst.dart';
 import 'package:aldebaran_native_flutter/app/controllers/init_controller.dart';
 import 'package:aldebaran_native_flutter/app/models/params_model.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,23 @@ class _InitViewState extends State<InitView> {
             child: Column(
               children: [
                 AreaChart(
-                  initController.chartData(money: [], popupanca: [], cdb: []),
+                  initController.chartData(
+                    carteira: ParamsModel(
+                      investimentPeriod: 13,
+                      investimentType: INVESTMENT.carteira,
+                      investmentValue: 10,
+                    ),
+                    poupanca: ParamsModel(
+                      investimentPeriod: 13,
+                      investimentType: INVESTMENT.poupanca,
+                      investmentValue: 10,
+                    ),
+                    cdb: ParamsModel(
+                      investimentPeriod: 13,
+                      investimentType: INVESTMENT.cdi,
+                      investmentValue: 10,
+                    ),
+                  ),
                   animate: true,
                 ),
                 Card(

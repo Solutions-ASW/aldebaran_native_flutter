@@ -129,9 +129,9 @@ class InitController extends Disposable {
   }
 
   List<charts.Series<dynamic, num>> chartData({
-    required List<AreaChartData> money,
-    required List<AreaChartData> popupanca,
-    required List<AreaChartData> cdb,
+    ParamsModel? carteira,
+    ParamsModel? poupanca,
+    ParamsModel? cdb,
   }) {
     return [
       charts.Series<AreaChartData, int>(
@@ -139,21 +139,28 @@ class InitController extends Disposable {
         colorFn: (_, __) => charts.Color.fromHex(code: "#4CB050"),
         domainFn: (AreaChartData balance, _) => balance.week,
         measureFn: (AreaChartData balance, _) => balance.value,
-        data: AreaChartData.mockDinheiro,
+        data: getYieldByWeek(carteira!)
+            .map<AreaChartData>((e) => AreaChartData(e.semana!, e.acumulado!))
+            .toList(),
+        //AreaChartData.mockDinheiro,
       ),
       charts.Series<AreaChartData, int>(
         id: 'Poupança',
         colorFn: (_, __) => charts.Color.fromHex(code: "#813DFB"),
         domainFn: (AreaChartData balance, _) => balance.week,
         measureFn: (AreaChartData balance, _) => balance.value,
-        data: AreaChartData.mockPoupanca,
+        data: getYieldByWeek(poupanca!)
+            .map<AreaChartData>((e) => AreaChartData(e.semana!, e.acumulado!))
+            .toList(),
       ),
       charts.Series<AreaChartData, int>(
         id: 'CDB',
         colorFn: (_, __) => charts.Color.fromHex(code: "#ED8562"),
         domainFn: (AreaChartData balance, _) => balance.week,
         measureFn: (AreaChartData balance, _) => balance.value,
-        data: AreaChartData.mockCDB,
+        data: getYieldByWeek(cdb!)
+            .map<AreaChartData>((e) => AreaChartData(e.semana!, e.acumulado!))
+            .toList(),
       ),
     ];
   }
