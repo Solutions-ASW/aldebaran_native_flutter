@@ -1,9 +1,2 @@
 include ':app'
-setBinding(new Binding([gradle: this]))
-evaluate(new File(
-  settingsDir,
-  'aldebaran_native_flutter/.android/include_flutter.groovy'
-))
-rootProject.name = "AldebaranNative"
-
-include ':aldebaran_native_flutter'
+rootProject.name = "My Application"
